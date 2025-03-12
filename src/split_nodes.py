@@ -119,8 +119,9 @@ def split_nodes_link(old_nodes):
                     if before_text:
                         new_nodes.append(TextNode(before_text, TextType.TEXT))
                     
-                    # Add the link node
-                    new_nodes.append(TextNode(link_text, TextType.LINK, url))
+                    # Add the link node with guaranteed non-empty text
+                        link_text = link_text or ""  # Ensure it's at least an empty string
+                        new_nodes.append(TextNode(link_text, TextType.LINK, url))
                     
                     # Update start index to after this link markdown
                     start_idx = split_idx + len(link_markdown)
